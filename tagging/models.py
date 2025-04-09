@@ -155,8 +155,8 @@ class TagManager(models.Manager):
             filters = {}
 
         queryset = model._default_manager.filter()
-        for f in filters.items():
-            queryset.query.add_filter(f)
+        for filter_lhs, filter_rhs in filters.items():
+            queryset.query.add_filter(filter_lhs=filter_lhs, filter_rhs=filter_rhs)
         usage = self.usage_for_queryset(queryset, counts, min_count)
 
         return usage
